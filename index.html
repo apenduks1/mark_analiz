@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Аналіз оцінок</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// ТУТ ВСТАВИШ СВІЙ FIREBASE CONFIG
+const firebaseConfig = {
+
+apiKey: "YOUR_KEY",
+authDomain: "YOUR_DOMAIN",
+projectId: "YOUR_PROJECT_ID",
+storageBucket: "YOUR_BUCKET",
+messagingSenderId: "YOUR_ID",
+appId: "YOUR_APP_ID"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+const select = document.getElementById("classSelect");
+const tableBody = document.getElementById("tableBody");
+const title = document.getElementById("tableTitle");
+
+
+async function loadData(className){
+
+title.innerText = className;
+
+const docRef = doc(db,"classes",className);
+const docSnap = await getDoc(docRef);
+
+if(!docSnap.exists()){
+tableBody.innerHTML="<tr><td colspan='9'>Немає даних</td></tr>";
+return;
+}
+
+const d = docSnap.data();
+
+tableBody.innerHTML = `
+<tr>
+<td>${d.students}</td>
+<td>${d.high}</td>
+<td>${d.highPercent}</td>
+<td>${d.good}</td>
+<td>${d.goodPercent}</td>
+<td>${d.middle}</td>
+<td>${d.middlePercent}</td>
+<td>${d.low}</td>
+<td>${d.lowPercent}</td>
+</tr>
+`;
+
+}
+
+select.addEventListener("change",()=>{
+
+loadData(select.value)
+
+});
+
+window.addEventListener("DOMContentLoaded",()=>{
+
+loadData(select.value)
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>Аналіз оцінок</h1>
+</header>
+
+<div class="container">
+
+<main>
+
+<div class="controls">
+
+<label>Оберіть клас:</label>
+
+<select id="classSelect">
+<option value="5-A">5-А</option>
+<option value="5-Б">5-Б</option>
+<option value="5-В">5-В</option>
+<option value="5-Г">5-Г</option>
+
+<option value="6-А">6-А</option>
+<option value="6-Б">6-Б</option>
+<option value="6-В">6-В</option>
+<option value="6-Г">6-Г</option>
+
+<option value="7-A">7-А</option>
+<option value="7-Б">7-Б</option>
+<option value="7-В">7-В</option>
+<option value="7-Г">7-Г</option>
+
+<option value="8-A">8-А</option>
+<option value="8-Б">8-Б</option>
+<option value="8-В">8-В</option>
+<option value="9-Г">9-Г</option>
+
+
+<option value="10-A">10-А</option>
+<option value="10-Б">10-Б</option>
+
+<option value="11-A">11-А</option>
+<option value="11-Б">11-Б</option>
+
+<option value="Паралель 5 класів">Паралель 5 класів</option>
+<option value="Паралель 6 класів">Паралель 6 класів</option>
+<option value="Паралель 7 класів">Паралель 7 класів</option>
+<option value="Паралель 8 класів">Паралель 8 класів</option>
+<option value="Паралель 9 класів">Паралель 9 класів</option>
+<option value="Паралель 10 класів">Паралель 10 класів</option>
+<option value="Паралель 11 класів">Паралель 11 класів</option>
+
+</select>
+
+</div>
+
+<h2 id="tableTitle"></h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>К-сть учнів</th>
+<th>Високий</th>
+<th>%</th>
+<th>Достатній</th>
+<th>%</th>
+<th>Середній</th>
+<th>%</th>
+<th>Початковий</th>
+<th>%</th>
+</tr>
+
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</main>
+
+<aside>
+
+<h3>Новини</h3>
+
+<div class="news">
+
+<img src="https://nz.ua/bnr/bnr_200x200_1.png" style="width: 300px;" height="300px">
+
+
+
+</div>
+
+<div class="news">
+
+<img style="width: 400px;" height="300px" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_320,h_240/https://nvk2-kamin.volyn.ua/wp-content/uploads/2019/02/banner_320x240.jpg">
+
+
+
+</div>
+
+</aside>
+
+</div>
+
+</body>
+</html>
