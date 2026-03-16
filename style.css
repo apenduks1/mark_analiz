@@ -1,74 +1,161 @@
 body{
-font-family:Arial;
+font-family:Arial, sans-serif;
 margin:0;
 background:#f4f4f4;
+font-size:16px;
 }
 
 header{
 text-align:center;
 background:#504992;
 color:white;
-padding:20px;
+padding:25px;
+margin: 0;
+}
+
+header h1{
+font-size:32px;
+margin:0;
 }
 
 .container{
 display:flex;
 gap:20px;
 padding:20px;
+max-width:1200px;
+margin:auto;
 }
 
 main{
 flex:3;
 background:white;
-padding:20px;
-border-radius:8px;
+padding:25px;
+border-radius:10px;
 }
 
 aside{
 flex:1;
 background:white;
-padding:20px;
-border-radius:8px;
+padding:25px;
+border-radius:10px;
 }
 
 .controls{
-margin-bottom:20px;
+margin-bottom:25px;
+font-size:18px;
 }
 
 select{
-padding:8px;
+padding:12px;
 font-size:16px;
+width:100%;
+max-width:320px;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
+font-size:16px;
 }
 
 th,td{
 border:1px solid #ccc;
-padding:10px;
+padding:12px;
 text-align:center;
 }
 
 th{
 background:#eee;
+font-size:17px;
 }
 
 .news{
-margin-bottom:20px;
+margin-bottom:25px;
+text-align:center;
 }
 
 .news img{
 width:100%;
-border-radius:6px;
+max-width:320px;
+height:auto;
+border-radius:8px;
 }
 
-.news a{
+
+/* ---------------------- */
+/* планшет */
+/* ---------------------- */
+
+@media (max-width:1024px){
+
+body{
+font-size:17px;
+}
+
+header h1{
+font-size:30px;
+}
+
+.container{
+flex-direction:column;
+}
+
+aside{
+order:2;
+}
+
+.news img{
+max-width:400px;
+}
+
+}
+
+
+/* ---------------------- */
+/* телефон */
+/* ---------------------- */
+
+@media (max-width:600px){
+
+body{
+font-size:18px;
+}
+
+header h1{
+font-size:26px;
+}
+
+.container{
+padding:10px;
+}
+
+main{
+padding:18px;
+}
+
+aside{
+padding:18px;
+}
+
+select{
+font-size:16px;
+}
+
+table{
 display:block;
-margin-top:8px;
-font-weight:bold;
-color:#1976d2;
-text-decoration:none;
+overflow-x:auto;
+font-size:15px;
+}
+
+th,td{
+padding:10px;
+}
+
+.news img{
+max-width:100%;
+}
+
 }
